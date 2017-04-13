@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,15 +40,16 @@ public class RegisterActivity extends AppCompatActivity {
                             JSONObject myJSON = new JSONObject(response);
                             boolean success = myJSON.getBoolean("success");
                             Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(myIntent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     }
                 };
-                RegisterRequest myRegister = new RegisterRequest(name, username, password, responseListener){
-
-                };
+                RegisterRequest myRegister = new RegisterRequest(name, username, password, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                queue.add(myRegister);
             }
         });
     }
