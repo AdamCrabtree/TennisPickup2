@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        final TextView tvRegisterError = (TextView) findViewById(R.id.tvRegisterError);
 
 
         final Button bRegister = (Button) findViewById(R.id.bRegister);
@@ -39,8 +41,13 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             JSONObject myJSON = new JSONObject(response);
                             boolean success = myJSON.getBoolean("success");
-                            Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(myIntent);
+                            if(success) {
+                                Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(myIntent);
+                            }
+                            else{
+                                tvRegisterError.setText("User already exists, try different username");
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

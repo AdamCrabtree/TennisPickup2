@@ -10,14 +10,14 @@ import java.util.Map;
  * Created by acrab on 4/12/2017.
  */
 
-public class LoginRequest extends StringRequest {
-    public static final String REGISTER_REQUEST_URL = "https://toledopickupapp.000webhostapp.com/login.php";
+public class CreateMatchRequest extends StringRequest {
+    public static final String REGISTER_REQUEST_URL = "https://toledopickupapp.000webhostapp.com/matchregister.php";
     private Map<String, String> params;
-    public LoginRequest(String username, String password, Response.Listener<String> listener){
+    public CreateMatchRequest(String playername, String time, Response.Listener<String> listener){
         super(Method.POST, REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        params.put("username", username);
-        params.put("password", password);
+        params.put("playername", playername);
+        params.put("time", time);
     }
     public Map<String, String> getParams(){
         return params;
