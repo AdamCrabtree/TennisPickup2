@@ -11,12 +11,11 @@ import java.util.Map;
  */
 
 public class MatchesRequest extends StringRequest {
-    public static final String REGISTER_REQUEST_URL = "https://toledopickupapp.000webhostapp.com/matchregister.php";
+    public static final String REGISTER_REQUEST_URL = "https://toledopickupapp.000webhostapp.com/getmatches.php";
     private Map<String, String> params;
-    public MatchesRequest(String playername, String time, Response.Listener<String> listener){
+    public MatchesRequest(Response.Listener<String> listener){
         super(Method.POST, REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        params.put("playername", playername);
     }
     public Map<String, String> getParams(){
         return params;

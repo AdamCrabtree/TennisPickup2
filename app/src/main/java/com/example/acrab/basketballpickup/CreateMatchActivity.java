@@ -14,6 +14,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CreateMatchActivity extends AppCompatActivity{
 
     @Override
@@ -23,7 +26,7 @@ public class CreateMatchActivity extends AppCompatActivity{
         final TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         Button createMatchButton = (Button) findViewById(R.id.confirm_create_match);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
-        final String playername = settings.getString("name","default");
+        final String playername = settings.getString("username","default");
         createMatchButton.setOnClickListener(new View.OnClickListener() {
             final String hours = Integer.toString(timePicker.getHour());
             final String minutes = Integer.toString(timePicker.getMinute());
@@ -32,7 +35,13 @@ public class CreateMatchActivity extends AppCompatActivity{
                 Response.Listener<String> responseListener = new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         Intent mapsIntent = new Intent(CreateMatchActivity.this, MapsActivity.class);
+                        startActivity(mapsIntent);
                     }
                 };
                 CreateMatchRequest myRegister = new CreateMatchRequest(playername, time, responseListener);

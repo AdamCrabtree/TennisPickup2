@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 tvRegisterError.setText("User already exists, try different username");
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            tvRegisterError.setText("User already exists! Try a different username");
                         }
 
                     }

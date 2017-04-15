@@ -46,11 +46,11 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if(success){
-                                String name = jsonResponse.getString("name");
-                                String userID = jsonResponse.getString("userID");
+                                String name = jsonResponse.getString("username");
+                                String userID = jsonResponse.getString("user_id");
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
-                                editor.putString("name", name);
+                                editor.putString("username", username);
                                 editor.putString("userID", userID);
                                 editor.commit();
                                 Intent mapIntent = new Intent(LoginActivity.this, MapsActivity.class);
