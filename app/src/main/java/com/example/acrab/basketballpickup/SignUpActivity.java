@@ -15,7 +15,7 @@ public class SignUpActivity extends AppCompatActivity {
         nameAndTime = extras.getString("NAME_AND_TIME_STRING");
         TextView timeTextView = (TextView) findViewById(R.id.timeView);
         TextView nameTextView = (TextView) findViewById(R.id.nameView);
-        String name[] = nameAndTime.split(" ");
+        String name[] = nameAndTime.split(",");
         nameTextView.setText(name[0]);
         timeTextView.setText(name[1]);
     }
